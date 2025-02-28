@@ -355,7 +355,7 @@ const DataTable = ({ data, handleDelete, setTruckData }) => {
     rowsPerPageOptions: [3, 10, 15, 20],
     download: false,
     print: false,
-    viewColumns: true,
+    viewColumns:false,
     search: true,
     customToolbar: () => (
       <IconButton color="primary" onClick={() => handleOpen(null)}>
@@ -366,18 +366,36 @@ const DataTable = ({ data, handleDelete, setTruckData }) => {
 
   return (
     <>
-      <MUIDataTable
-        title={
-          <h1 className="text-cyan-700 font-bold upercase font-serif font-antialiased 
-        text-shadow-md text-2xl">
-            Truck Delivery Data</h1>
-        }
-        data={data}
-        columns={columns}
-        options={options}
-      />
+      <div className="overflow-x-auto md:overflow-x-hidden">
+        <MUIDataTable
+          title={
+            <h1 className="text-cyan-700 font-bold uppercase font-serif font-antialiased 
+          text-shadow-md text-2xl">
+              Truck Delivery Data
+            </h1>
+          }
+          data={data}
+          columns={columns}
+          options={options}
+        />
+      </div>
       <Modal open={open} onClose={handleClose}>
-        <Box className="modal-box">
+        <Box className="modal-box"
+          sx={{ 
+            position: 'absolute', 
+            top: '50%', 
+            left: '50%', 
+            transform: 'translate(-50%, -50%)', 
+            width: '80%', 
+            maxWidth: '800px', 
+            maxHeight: '90vh', // Ensure the modal box does not exceed 90% of the viewport height
+            overflowY: 'auto', // Add vertical scrollbar if content overflows
+            bgcolor: 'background.paper', 
+            border: '2px solid #000', 
+            boxShadow: 24, 
+            p: 4 
+          }}
+        >
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
               <h2>{editMode ? 'Edit Truck Data' : 'Add New Truck Data'}</h2>
@@ -389,144 +407,127 @@ const DataTable = ({ data, handleDelete, setTruckData }) => {
             </Grid>
           </Grid>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Truck Number"
-                  name="truckNo"
-                  value={formData.truckNo}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Driver Name"
-                  name="driverName"
-                  value={formData.driverName}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Material Name"
-                  name="materialName"
-                  value={formData.materialName}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Material Quantity"
-                  name="quantity"
-                  value={formData.quantity}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Bill Number"
-                  name="billNo"
-                  value={formData.billNo}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Bill Date"
-                  name="billDate"
-                  value={formData.billDate}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Material Return Quantity"
-                  name="materialreturnQuality"
-                  value={formData.materialreturnQuality}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  label="Location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    className: "text-indigo-600 font-serif font-semibold font-base"
-                  }}
-                  InputProps={{
-                    className: "text-bule-700 font-mono font-base font-antialiased font-medium"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button type="submit" variant="contained" color="primary"
-                  className='outline outline-offset-2 outline-pink-500 outline-2 
-                hover: ring-offset-2 ring-2  ring-offset-slate-50 
-                dark:ring-offset-slate-900'>
-                  Submit
-                </Button>
-              </Grid>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-8 gap-4">
+              <TextField
+                label="Truck Number"
+                name="truckNo"
+                value={formData.truckNo}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Driver Name"
+                name="driverName"
+                value={formData.driverName}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Material Name"
+                name="materialName"
+                value={formData.materialName}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Material Quantity"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Bill Number"
+                name="billNo"
+                value={formData.billNo}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Bill Date"
+                name="billDate"
+                value={formData.billDate}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Material Return Quantity"
+                name="materialreturnQuality"
+                value={formData.materialreturnQuality}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+              <TextField
+                label="Location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  className: "text-indigo-600 font-serif font-semibold font-base"
+                }}
+                InputProps={{
+                  className: "text-blue-700 font-mono font-base font-antialiased font-medium"
+                }}
+              />
+            </div>
+            <Grid item xs={12} className="mt-4">
+              <Button type="submit" variant="contained" color="primary"
+                className='outline outline-offset-2 outline-pink-500 outline-2 
+              hover:ring-offset-2 ring-2 ring-offset-slate-50 
+              dark:ring-offset-slate-900'>
+                Submit
+              </Button>
             </Grid>
           </form>
         </Box>

@@ -31,8 +31,8 @@ function Dashboard() {
       </div>
 
       <div className="flex flex-col md:flex-row h-screen">
-        <div className="bg-gray-800 text-white  w-full md:w-1/4 lg:w-44 pt-4 ">
-          <Sidebar />
+        <div className="bg-gray-800 text-white  w-full md:w-1/4 lg:w-44 pt-4  ">
+          <Sidebar  className=''/>
         </div>
         <div className="flex-1 bg-gradient-to-r from-yellow-100 via-red-200 to-pink-100 p-4 md:p-10">
           <p className="text-2xl font-semibold mb-10 text-fuchsia-800 text-shadow-md text-center">Dashboard Page</p>

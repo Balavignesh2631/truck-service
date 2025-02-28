@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Getpass from './components/Getpass';
 import LoginPage from './components/LoginPage';
+import MaterialCategory from './components/MaterialCategory';
 
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
         <Route path='/' element={<LoginPage></LoginPage>}/>
         <Route path="/dashboard" element={<Dashboard></Dashboard>} />
         <Route path="/getpass" element={<Getpass></Getpass>} />
+        <Route path="/materialcategory" element={<MaterialCategory></MaterialCategory>}/>
+
       </Routes>
     </Router>
   );

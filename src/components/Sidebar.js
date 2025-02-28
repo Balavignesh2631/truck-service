@@ -8,16 +8,16 @@ function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="bg-gray-800 w-full text-white h-full">
-      <ul className='space-y-4  ' >
+    <div className="bg-gray-800 w-full  text-white h-full">
+      <ul className='space-y-4 w-full ' >
         {SidebarData.map((val, key) => {
           return (
             <li
-              className={`flex items-center justify-items-start  p-2  cursor-pointer hover:bg-gray-700 ${location.pathname === val.link ? 'bg-gray-700' : ''}`}
+              className={`flex items-center justify-items-start  pt-2  cursor-pointer hover:bg-gray-700   ${location.pathname === val.link ? 'bg-gray-700 ' : ''}`}
               key={key}
               onClick={() => navigate(val.link)}
             >
-              <div className='flex items-start justify-items-start '>
+              <div className='flex items-center justify-items-start relative right-6  '>
                 <div className='mr-4'>
                   {val.icon}
                 </div>

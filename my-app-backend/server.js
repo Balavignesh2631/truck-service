@@ -8,27 +8,33 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Database connection
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '2631',
-  database: 'truckdeliverydb'
-});
-//connect to mysql
-db.connect((err)=>{
-    if(err){
-        console.error('error connecting:' + err.stack);
-    return;
+//Database Connection
 
+const db =mysql.createConnection (
+    {
+        host:'localhost',
+        user :'root',
+        password:'',
+        database: 'truckdeliverydb'
     }
-    console.log('connected as id '+ db.threadId);
-});
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
+);
 
+//connect to mysql
+
+db.connect ((err) => {
+    if(err) {
+        console.error('error connecting:' + err.stack);
+        return;
+    }
+    console.log('connected as id ' + db.threadId);
+}
+);
+
+//start the server
+
+app.listen ( port, () =>{
+    console.log(`server running on http://localhost:${port}`);
+});
 //POST route to handle form submission
 app.post('/api/truckdatas',(req,res)=>{
     const { truckNo,driverName,materialName,quantity,billNo,billDate,materialreturnQuality,location}=req.body;
